@@ -81,7 +81,7 @@ public class AnalyseAudio
 	}
 	public static void clapCheck()
 	{
-		GraphingAudio g = new GraphingAudio();
+		AudioCapture g = new AudioCapture();
 		ArrayList<int[]> lst = g.getList(); 
 		int [] preArr;
 		int [] arr;
@@ -261,10 +261,11 @@ public class AnalyseAudio
         	}
         }
 	}
- */	
+ 	*/
 	public static void main(String[] args) 
 	{
 		clapCheck();
 	}
+	
 }
 
