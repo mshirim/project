@@ -1,8 +1,8 @@
-import java.io.File;
+//import java.io.File;
 import java.nio.ByteBuffer;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import com.sun.*;
+//import javax.sound.sampled.AudioInputStream;
+//import javax.sound.sampled.AudioSystem;
+//import com.sun.*;
 
 import java.util.*;
 
@@ -155,35 +155,41 @@ public class AnalyseAudio
 								if(a6>700 && b6>700 && c6>700 &&d6>700 && e6>700 && f6>700)
 								{
 									System.out.println("clap");
+                                                                        LightLed.Light();
 									i = i+5;
 								}
 								else
 								{
 									System.out.println("clap");
+                                                                        LightLed.Light();
 									i = i+4;
 								}
 							}
 							else
 							{
 								System.out.println("clap");
+                                                                LightLed.Light();
 								i = i+3;
 							}
 						}
 						else
 						{
 							System.out.println("clap");
+                                                        LightLed.Light();
 							i = i+2;
 						}
 					}
 					else
 					{
 						System.out.println("clap");
+                                                LightLed.Light();
 						i++;
 					}
 				}
 				else
 				{
 					System.out.println("clap");
+                                        LightLed.Light();
 				}
 			}
         }
@@ -262,10 +268,6 @@ public class AnalyseAudio
         }
 	}
  	*/
-	public static void main(String[] args) 
-	{
-		clapCheck();
-	}
 	
 }
 

@@ -16,7 +16,7 @@ public class AudioCapture
 		ArrayList<int[]> lst2 = new ArrayList<int[]>();
 		TargetDataLine line;
 		int depth = 2; //depth in bytes
-		AudioFormat format = new AudioFormat(44100, depth*8, 2, true, false);
+		AudioFormat format = new AudioFormat(44100, depth*8, 1, true, false);
 		DataLine.Info info = new DataLine.Info(TargetDataLine.class, 
 		    format); // format is an AudioFormat object
 		int channels = 2;
@@ -27,8 +27,10 @@ public class AudioCapture
 		// Obtain and open the line.
 		try 
 		{
-		    line = (TargetDataLine) AudioSystem.getLine(info);
-		    line.open(format);
+		   Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();
+                   Mixer mixer = AudioSystem.getMixer(mixerInfos[3]);
+                   line = (TargetDataLine) mixer.getLine(info);
+            	   line.open(format);
 		} 
 		catch (LineUnavailableException ex)
 		{
