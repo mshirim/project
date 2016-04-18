@@ -1,50 +1,47 @@
 
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author דודו
- */
 import com.pi4j.io.gpio.*;
+
 public class LightLed 
 {
-    /**
-     * @param args the command line arguments
-     */
-    public static void Light()
+    private GpioPinDigitalOutput pin;   // the pin that'll light
+    private GpioController gpio;
+    
+    public LightLed()
     {
-        // TODO code application logic here
          try
         { 
-            final GpioController gpio = GpioFactory.getInstance();
+            this.gpio = GpioFactory.getInstance();
 
             // provision gpio pin #17 as an output pin and turn on
-            final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, "pin",PinState.HIGH);
-
-            PinState state = pin.getState();
-            Thread.sleep(5000);
-//            if(state == PinState.HIGH)
-//            {
-//                 // set shutdown state for this pin
-//                  pin.setShutdownOptions(true, PinState.LOW);
-//            }
-//             if(state == PinState.LOW)
-//            {
-//                 // set shutdown state for this pin
-//                  pin.setShutdownOptions(true, PinState.HIGH);
-//            }
-        pin.setShutdownOptions(true, PinState.HIGH);
+            this.pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
+            
         }
         catch(Exception ex)
         {
                System.out.println(ex);     
         }
     }
+    public void Light() // Light LED if it's off and turn off if it's on
+    {
+         try
+        { 
+            if(this.pin.getState()==  PinState.LOW)
+            {
+                this.pin.setState(PinState.HIGH);
+            }
+            else if(this.pin.getState() == PinState.HIGH)
+            {
+                this.pin.setState(PinState.LOW);
+            }
+            //   Thread.sleep(5000);
+            //   pin.setShutdownOptions(true, PinState.HIGH);
+        }
+        catch(Exception e)
+        {
+               System.out.println(e);     
+        }
+    }
+}
       
     
-}
+
