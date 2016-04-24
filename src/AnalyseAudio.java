@@ -4,14 +4,13 @@ import java.util.*;
 public class AnalyseAudio
 {	
     public static void clapCheck()  //Analyse the input 
-    {
+    {								//if a clap is detected the LED will light
         LightLed led = new LightLed();
         int h =0;
         AudioCapture g ;
         ArrayList<int[]> lst;
-        int [] preArr;
         int [] arr;
-        int a,b,c,d,e,f;
+        int a,b,c,d,e,f;	//variables that'll use for averages
         int a2,b2,c2,d2,e2,f2;
         int a3,b3,c3,d3,e3,f3;
         int a4,b4,c4,d4,e4,f4;
@@ -22,23 +21,21 @@ public class AnalyseAudio
         int [] arr4;
         int [] arr5;
         int [] arr6;
-        while (++h < 100000)    
+        while (++h < 1000000)   // as long as this is true the function'll run 
         {
             g = new AudioCapture(); //  reading the data
             lst = g.getList();      //  getting all the data to be analysed
             for(int i=0; i<lst.size() ; i++)
             {	
-                arr= lst.get(i);    //getting the first part of the data
-                a= (arr[0]+arr[1]+arr[2]+arr[3]+arr[4]+arr[5])/6;   //the avrage of six values
+                arr= lst.get(i);    //getting a specific part of the data
+                a= (arr[0]+arr[1]+arr[2]+arr[3]+arr[4]+arr[5])/6;   //the average of six values
                 b= (arr[200]+arr[201]+arr[202]+arr[203]+arr[204]+arr[205])/6;
                 c= (arr[400]+arr[401]+arr[402]+arr[403]+arr[404]+arr[405])/6;
                 d= (arr[600]+arr[601]+arr[602]+arr[603]+arr[604]+arr[605])/6;
                 e= (arr[800]+arr[801]+arr[802]+arr[803]+arr[804]+arr[805])/6;
                 f= (arr[1000]+arr[1001]+arr[1002]+arr[1003]+arr[1004]+arr[1005])/6;
-                //System.out.println(a+ "\n"+b+ "\n"+c+ "\n"+d+ "\n"+e+ "\n"+f);
                 if(a>700 && b>700 && c>700 && d>700 && e>700 && f>700 && (i+1)<lst.size())  //if they're all
-                                                                                            //relatively high
-                {
+                {																			//relatively high
                     arr2= lst.get(i+1);
                     a2= (arr2[0]+arr2[1]+arr2[2]+arr2[3]+arr2[4]+arr2[5])/6;
                     b2= (arr2[200]+arr2[201]+arr2[202]+arr2[203]+arr2[204]+arr2[205])/6;
@@ -86,7 +83,7 @@ public class AnalyseAudio
                                     if(a6>700 && b6>700 && c6>700 &&d6>700 && e6>700 && f6>700)
                                     {
                                         System.out.println("clap");
-                                        led.Light();
+                                        led.Light();	// LightLed will start
                                         i = i+5;
                                     }
                                     else

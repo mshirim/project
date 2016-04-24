@@ -5,7 +5,7 @@ import javax.sound.sampled.*;
 
 public class AudioCapture 
 {
-    public int getSixteenBitSample(int high, int low)   // Convert to bytes to short type
+    public int getSixteenBitSample(int high, int low)   // Convert two bytes to a short type
     {
         return (high << 8) + (low & 0x00ff);
     } 
@@ -14,20 +14,20 @@ public class AudioCapture
     {
         ArrayList<int[]> lst2 = new ArrayList<int[]>(); 
         TargetDataLine line;
-	int depth = 2; //depth in bytes
+        int depth = 2; //depth in bytes
         AudioFormat format = new AudioFormat(44100, depth*8, 1, true, false);
-	DataLine.Info info = new DataLine.Info(TargetDataLine.class, 
+        DataLine.Info info = new DataLine.Info(TargetDataLine.class, 
             format); // format is an AudioFormat object
-	int channels = 2;
+        int channels = 2;
 	if (!AudioSystem.isLineSupported(info)) 
 	{
 	    // Handle the error ... 
 	}
 	// Obtain and open the line.
-        try 
+    try 
 	{
             Mixer.Info[] mixerInfos = AudioSystem.getMixerInfo();    // get the possible mixers
-            Mixer mixer = AudioSystem.getMixer(mixerInfos[3]);   //choose the correct mixe
+            Mixer mixer = AudioSystem.getMixer(mixerInfos[3]);   //choose the correct mixer
             line = (TargetDataLine) mixer.getLine(info);
             line.open(format);
    	} 
@@ -46,11 +46,8 @@ public class AudioCapture
         // Begin audio capture.
         line.start();
         int i = 0;
-        // Here, stopped is a global boolean set by another thread.
-        //System.out.println("start");
         while (++i < 6) 
         {
-            // System.out.println("OK");
             // Read the next chunk of data from the TargetDataLine.
             numBytesRead =  line.read(data, 0, data.length);
             // Save this chunk of data.
@@ -67,7 +64,7 @@ public class AudioCapture
                     int high = (int) data[t];
                     t++;
                     int sample = getSixteenBitSample(high, low);
-                    // Sample is a 16 bit consists of the 8-bit of the high and low bytes
+                    // Sample is a 16 bit (short) consists of the 8-bit of the high and low bytes
                     samples[channel][sampleIndex] = sample;
                 }
                 sampleIndex++;

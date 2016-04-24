@@ -4,16 +4,15 @@ import com.pi4j.io.gpio.*;
 public class LightLed 
 {
     private GpioPinDigitalOutput pin;   // the pin that'll light
-    private GpioController gpio;
+    private GpioController gpio;		//the type of the interface
     
     public LightLed()
     {
          try
         { 
-            this.gpio = GpioFactory.getInstance();
-
+            this.gpio = GpioFactory.getInstance();// the only PGIO controller instance 
             // provision gpio pin #17 as an output pin and turn on
-            this.pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00);
+            this.pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00); //configure the pin
             
         }
         catch(Exception ex)
